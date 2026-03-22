@@ -8,22 +8,22 @@ if (-not $Package) {
 
 $Repo = "lepijohnny/sparky-extractors"
 $Branch = "main"
-$Dest = Join-Path (Join-Path (Join-Path (Join-Path (Join-Path $env:USERPROFILE ".sparky") "plugins") "ext") "node_modules") $Package
+$Dest = "$env:USERPROFILE\.sparky\plugins\ext\node_modules\$Package"
 
-$TmpDir = Join-Path ([System.IO.Path]::GetTempPath()) ("sparky-ext-" + [System.Guid]::NewGuid().ToString("N").Substring(0,8))
+$TmpDir = "$env:TEMP\sparky-ext-$([System.Guid]::NewGuid().ToString('N').Substring(0,8))"
 New-Item -ItemType Directory -Path $TmpDir -Force | Out-Null
 
 try {
     Write-Host "Downloading $Package..."
     $ZipUrl = "https://github.com/$Repo/archive/refs/heads/$Branch.zip"
-    $ZipPath = Join-Path $TmpDir "repo.zip"
+    $ZipPath = "$TmpDir\repo.zip"
     Invoke-WebRequest -Uri $ZipUrl -OutFile $ZipPath -UseBasicParsing
 
     Expand-Archive -Path $ZipPath -DestinationPath $TmpDir -Force
 
-    $SrcDir = Join-Path (Join-Path (Join-Path $TmpDir "sparky-extractors-$Branch") "packages") $Package
+    $SrcDir = "$TmpDir\sparky-extractors-$Branch\packages\$Package"
     if (-not (Test-Path $SrcDir)) {
-        $Available = Get-ChildItem (Join-Path (Join-Path $TmpDir "sparky-extractors-$Branch") "packages") -Directory | Select-Object -ExpandProperty Name
+        $Available = Get-ChildItem "$TmpDir\sparky-extractors-$Branch\packages" -Directory | Select-Object -ExpandProperty Name
         Write-Error "Package '$Package' not found. Available: $($Available -join ', ')"
         exit 1
     }
