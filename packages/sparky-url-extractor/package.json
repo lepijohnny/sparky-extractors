@@ -1,0 +1,62 @@
+{
+  "name": "sparky-url-extractor",
+  "version": "1.1.1",
+  "description": "URL extractor plugin for Sparky — crawls web pages and extracts clean markdown using Mozilla Readability. Preserves headings, links, code blocks, tables, and lists. Supports llms.txt, robots.txt, sitemap.xml, and BFS crawling.",
+  "keywords": [
+    "sparky-extractor"
+  ],
+  "sparky": {
+    "extractors": [
+      "./"
+    ],
+    "timeout": 600000,
+    "options": [
+      {
+        "key": "maxDepth",
+        "label": "Max crawl depth",
+        "type": "number",
+        "default": 3,
+        "description": "How many link-hops deep to follow from the start URL",
+        "min": 1,
+        "max": 10
+      },
+      {
+        "key": "maxPages",
+        "label": "Max pages",
+        "type": "number",
+        "default": 200,
+        "description": "Maximum number of pages to crawl per URL source",
+        "min": 1,
+        "max": 1000
+      },
+      {
+        "key": "timeout",
+        "label": "Page timeout (ms)",
+        "type": "number",
+        "default": 10000,
+        "description": "Timeout for fetching a single page",
+        "min": 1000,
+        "max": 60000,
+        "step": 1000
+      },
+      {
+        "key": "respectRobots",
+        "label": "Respect robots.txt",
+        "type": "boolean",
+        "default": true,
+        "description": "Obey Disallow rules and Crawl-delay from robots.txt"
+      },
+      {
+        "key": "useLlmsTxt",
+        "label": "Prefer llms.txt",
+        "type": "boolean",
+        "default": true,
+        "description": "Try /llms-full.txt and /llms.txt before crawling"
+      }
+    ]
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.5.0",
+    "linkedom": "^0.18.9"
+  }
+}

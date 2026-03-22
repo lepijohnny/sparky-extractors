@@ -1,0 +1,23 @@
+{
+  "name": "sparky-pdf-extractor",
+  "version": "1.0.0",
+  "description": "PDF extractor plugin for Sparky — extracts text and structure from PDF files",
+  "keywords": ["sparky-extractor"],
+  "main": "index.js",
+  "sparky": {
+    "extractors": ["./"],
+    "timeout": 120000,
+    "options": [
+      {
+        "key": "preserveLayout",
+        "label": "Preserve layout",
+        "type": "boolean",
+        "default": false,
+        "description": "Try to preserve the original page layout (columns, tables) instead of flowing text"
+      }
+    ]
+  },
+  "dependencies": {
+    "unpdf": "^0.12.1"
+  }
+}
