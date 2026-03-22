@@ -13,12 +13,24 @@ Extractor plugins for [Sparky](https://getsparky.chat) — add new source types 
 
 Install directly from GitHub (no clone needed):
 
+**macOS / Linux**
+
 ```bash
 # URL extractor
 bash <(curl -fsSL https://raw.githubusercontent.com/lepijohnny/sparky-extractors/main/install.sh) sparky-url-extractor
 
 # PDF extractor
 bash <(curl -fsSL https://raw.githubusercontent.com/lepijohnny/sparky-extractors/main/install.sh) sparky-pdf-extractor
+```
+
+**Windows (PowerShell)**
+
+```powershell
+# URL extractor
+&([scriptblock]::Create((irm https://raw.githubusercontent.com/lepijohnny/sparky-extractors/main/install.ps1))) sparky-url-extractor
+
+# PDF extractor
+&([scriptblock]::Create((irm https://raw.githubusercontent.com/lepijohnny/sparky-extractors/main/install.ps1))) sparky-pdf-extractor
 ```
 
 Restart Sparky after installing. Plugins are auto-discovered from `~/.sparky/plugins/ext/node_modules/`.
