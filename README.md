@@ -11,17 +11,14 @@ Extractor plugins for [Sparky](https://getsparky.chat) — add new source types 
 
 ## Install
 
-Clone the repo and install from local path:
+Install directly from GitHub (no clone needed):
 
 ```bash
-git clone https://github.com/lepijohnny/sparky-extractors.git
-cd sparky-extractors
-
 # URL extractor
-npm install ./packages/sparky-url-extractor --prefix ~/.sparky/plugins/ext
+bash <(curl -fsSL https://raw.githubusercontent.com/lepijohnny/sparky-extractors/main/install.sh) sparky-url-extractor
 
 # PDF extractor
-npm install ./packages/sparky-pdf-extractor --prefix ~/.sparky/plugins/ext
+bash <(curl -fsSL https://raw.githubusercontent.com/lepijohnny/sparky-extractors/main/install.sh) sparky-pdf-extractor
 ```
 
 Restart Sparky after installing. Plugins are auto-discovered from `~/.sparky/plugins/ext/node_modules/`.
