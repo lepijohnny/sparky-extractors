@@ -28,7 +28,7 @@ try {
     }
 
     Write-Host "Installing to $Dest..."
-    npm install $SrcDir --prefix $Dest
+    npm install $SrcDir --prefix $Dest --install-links
 
     Write-Host "Done. Restart Sparky to load $Package."
 } finally {

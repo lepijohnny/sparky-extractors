@@ -20,6 +20,6 @@ if [ ! -d "$SRCDIR" ]; then
 fi
 
 echo "Installing to $DEST..."
-npm install "$SRCDIR" --prefix "$DEST"
+npm install "$SRCDIR" --prefix "$DEST" --install-links
 
 echo "Done. Restart Sparky to load $PACKAGE."
