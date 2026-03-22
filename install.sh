@@ -4,7 +4,7 @@ set -e
 PACKAGE="${1:?Usage: install.sh <package-name>}"
 REPO="lepijohnny/sparky-extractors"
 BRANCH="main"
-DEST="$HOME/.sparky/plugins/ext"
+DEST="$HOME/.sparky/plugins/ext/node_modules/$PACKAGE"
 
 TMPDIR=$(mktemp -d)
 trap 'rm -rf "$TMPDIR"' EXIT
@@ -20,6 +20,9 @@ if [ ! -d "$SRCDIR" ]; then
 fi
 
 echo "Installing to $DEST..."
-npm install "$SRCDIR" --prefix "$DEST" --install-links
+rm -rf "$DEST"
+mkdir -p "$DEST"
+cp -R "$SRCDIR"/* "$DEST"/
+(cd "$DEST" && npm install --omit=dev 2>&1)
 
 echo "Done. Restart Sparky to load $PACKAGE."

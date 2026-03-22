@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 
 $Repo = "lepijohnny/sparky-extractors"
 $Branch = "main"
-$Dest = "$env:USERPROFILE\.sparky\plugins\ext"
+$Dest = Join-Path $env:USERPROFILE ".sparky" "plugins" "ext" "node_modules" $Package
 
 $TmpDir = Join-Path ([System.IO.Path]::GetTempPath()) ("sparky-ext-" + [System.Guid]::NewGuid().ToString("N").Substring(0,8))
 New-Item -ItemType Directory -Path $TmpDir -Force | Out-Null
@@ -28,7 +28,12 @@ try {
     }
 
     Write-Host "Installing to $Dest..."
-    npm install $SrcDir --prefix $Dest --install-links
+    if (Test-Path $Dest) { Remove-Item -Recurse -Force $Dest }
+    New-Item -ItemType Directory -Path $Dest -Force | Out-Null
+    Copy-Item -Path "$SrcDir\*" -Destination $Dest -Recurse
+    Push-Location $Dest
+    npm install --omit=dev
+    Pop-Location
 
     Write-Host "Done. Restart Sparky to load $Package."
 } finally {
