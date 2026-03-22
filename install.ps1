@@ -8,7 +8,7 @@ if (-not $Package) {
 
 $Repo = "lepijohnny/sparky-extractors"
 $Branch = "main"
-$Dest = Join-Path $env:USERPROFILE ".sparky" "plugins" "ext" "node_modules" $Package
+$Dest = Join-Path (Join-Path (Join-Path (Join-Path (Join-Path $env:USERPROFILE ".sparky") "plugins") "ext") "node_modules") $Package
 
 $TmpDir = Join-Path ([System.IO.Path]::GetTempPath()) ("sparky-ext-" + [System.Guid]::NewGuid().ToString("N").Substring(0,8))
 New-Item -ItemType Directory -Path $TmpDir -Force | Out-Null
@@ -21,9 +21,9 @@ try {
 
     Expand-Archive -Path $ZipPath -DestinationPath $TmpDir -Force
 
-    $SrcDir = Join-Path $TmpDir "sparky-extractors-$Branch" "packages" $Package
+    $SrcDir = Join-Path (Join-Path (Join-Path $TmpDir "sparky-extractors-$Branch") "packages") $Package
     if (-not (Test-Path $SrcDir)) {
-        $Available = Get-ChildItem (Join-Path $TmpDir "sparky-extractors-$Branch" "packages") -Directory | Select-Object -ExpandProperty Name
+        $Available = Get-ChildItem (Join-Path (Join-Path $TmpDir "sparky-extractors-$Branch") "packages") -Directory | Select-Object -ExpandProperty Name
         Write-Error "Package '$Package' not found. Available: $($Available -join ', ')"
         exit 1
     }
