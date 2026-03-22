@@ -1,9 +1,10 @@
-param(
-    [Parameter(Mandatory=$true, Position=0)]
-    [string]$Package
-)
-
 $ErrorActionPreference = "Stop"
+
+$Package = $args[0]
+if (-not $Package) {
+    Write-Error "Usage: install.ps1 <package-name>"
+    exit 1
+}
 
 $Repo = "lepijohnny/sparky-extractors"
 $Branch = "main"
