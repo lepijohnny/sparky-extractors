@@ -27,10 +27,10 @@ bash <(curl -fsSL https://raw.githubusercontent.com/lepijohnny/sparky-extractors
 
 ```powershell
 # URL extractor
-&([scriptblock]::Create((irm https://raw.githubusercontent.com/lepijohnny/sparky-extractors/main/install.ps1))) sparky-url-extractor
+irm https://raw.githubusercontent.com/lepijohnny/sparky-extractors/main/install.ps1 -OutFile $env:TEMP\install.ps1; & $env:TEMP\install.ps1 sparky-url-extractor
 
 # PDF extractor
-&([scriptblock]::Create((irm https://raw.githubusercontent.com/lepijohnny/sparky-extractors/main/install.ps1))) sparky-pdf-extractor
+irm https://raw.githubusercontent.com/lepijohnny/sparky-extractors/main/install.ps1 -OutFile $env:TEMP\install.ps1; & $env:TEMP\install.ps1 sparky-pdf-extractor
 ```
 
 Restart Sparky after installing. Plugins are auto-discovered from `~/.sparky/plugins/ext/node_modules/`.
